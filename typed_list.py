@@ -1,51 +1,54 @@
 class TypedList:
-    def __init__(self):
-        self.data = []
+    def __init__(self, data=None):
+        if data is None:
+            self.data = []
+        else:
+            self.data = data
 
     def length(self):
-        return len(self.items)
+        return len(self.data)
     
     def append(self, element):
-        self.items.append(element)
+        self.data.append(element)
 
     def insert(self, element, index):
-        if index < 0 or index > len(self.items):
-            raise IndexError("Invalid index")
-        self.items.insert(index, element)
+        if index < 0 or index > len(self.data):
+            raise IndexError("Index out of range")
+        self.data.insert(index, element)
 
     def delete(self, index):
-        if index < 0 or index >= len(self.items):
-            raise IndexError("Invalid index")
-        return self.items.pop(index)
+        if index < 0 or index >= len(self.data):
+            raise IndexError("Index out of range")
+        return self.data.pop(index)
         
     def deleteAll(self, element):
-        self.items = [item for item in self.items if item != element]
+        self.data = [item for item in self.data if item != element]
 
     def get(self, index):
-        if index < 0 or index >= len(self.items):
-            raise IndexError("Invalid index")
-        return self.items[index]
+        if index < 0 or index >= len(self.data):
+            raise IndexError("Index out of range")
+        return self.data[index]
 
     def clone(self):
-        return TypedList(self.items.copy())
+        return TypedList(self.data[:])
     
     def reverse(self):
-        self.items = self.items[::-1]
+        self.data = self.data[::-1]
 
     def findFirst(self, element):
-        for i in range(len(self.items)):
-            if self.items[i] == element:
+        for i in range(len(self.data)):
+            if self.data[i] == element:
                 return i
         return -1
     
     def findLast(self, element):
-        for i in range(len(self.items) - 1, -1, -1):
-            if self.items[i] == element:
+        for i in range(len(self.data) - 1, -1, -1):
+            if self.data[i] == element:
                 return i
         return -1
 
     def clear(self):
-        self.items = []
+        self.data = []
 
     def extend(self, elements):
-        self.items.extend(elements)
+        self.data.extend(elements)
