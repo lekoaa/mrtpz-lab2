@@ -30,4 +30,4 @@ py unit_test.py
 
 ## Conclusion
 
-Unit test helped me to find and fix my mistakes in code. I undrestood which part of code goes wrong to fix it. This is hepls to better understand your code and fix bugs but on my opinion for good use of this tests need more expiriendced person.
+Unit test helped me to find and fix my mistakes in code. I undrestood which part of code goes wrong to fix it. This is hepls to better understand your code and fix bugs but on my opinion for good use of this tests need more experienced person but still with low-experienced me unit test worth this time what I lost on it.
