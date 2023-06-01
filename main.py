@@ -1,20 +1,18 @@
 from typed_list import TypedList
 
-
 def main():
-
     lst = TypedList()
 
-    print("Initial Length:", lst.length())
+    print("Initial Length:", lst.get_length())
 
     lst.append('A')
     lst.append('B')
     lst.append('C')
 
-    print("Length after appending:", lst.length())
+    print("Length after appending:", lst.get_length())
 
-    lst.insert('X', 1)
-    lst.insert('Y', 3)
+    lst.insert('X' + str(1), 1)
+    lst.insert('Y' + str(1), 3)
 
     print("List after insertion:", lst)
 
@@ -34,11 +32,11 @@ def main():
     lst.reverse()
     print("Reversed list:", lst)
 
-    index = lst.findFirst('X')
-    print("Index of first 'X':", index)
+    index = lst.findFirst('X1')
+    print("Index of first 'X1':", index)
 
-    index = lst.findLast('Y')
-    print("Index of last 'Y':", index)
+    index = lst.findLast('Y1')
+    print("Index of last 'Y1':", index)
 
     lst.clear()
     print("List after clearing:", lst)
