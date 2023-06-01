@@ -6,38 +6,39 @@ class TypedListTest(unittest.TestCase):
         self.lst = TypedList()
 
     def test_length_empty(self):
-        self.assertEqual(self.lst.length(), 0)
+        self.assertEqual(self.lst.get_length(), 0)
 
     def test_length_nonempty(self):
         self.lst.append('A')
         self.lst.append('B')
         self.lst.append('C')
-        self.assertEqual(self.lst.length(), 3)
+        self.assertEqual(self.lst.get_length(), 3)
 
     def test_append(self):
         self.lst.append('A')
         self.lst.append('B')
-        self.assertEqual(self.lst.length(), 2)
+        self.assertEqual(self.lst.get_length(), 2)
         self.assertEqual(self.lst.get(0), 'A')
         self.assertEqual(self.lst.get(1), 'B')
 
     def test_insert_valid_index(self):
         self.lst.append('A')
         self.lst.insert('B', 0)
-        self.assertEqual(self.lst.length(), 2)
+        self.assertEqual(self.lst.get_length(), 2)
         self.assertEqual(self.lst.get(0), 'B')
         self.assertEqual(self.lst.get(1), 'A')
 
     def test_insert_invalid_index(self):
-        with self.assertRaises(IndexError):
-            self.lst.insert('A', 2)
+        self.lst.append('A')
+        with self.assertRaises(ValueError):
+            self.lst.insert('X', 2)
 
     def test_delete_valid_index(self):
         self.lst.append('A')
         self.lst.append('B')
         deleted_item = self.lst.delete(0)
         self.assertEqual(deleted_item, 'A')
-        self.assertEqual(self.lst.length(), 1)
+        self.assertEqual(self.lst.get_length(), 1)
         self.assertEqual(self.lst.get(0), 'B')
 
     def test_delete_invalid_index(self):
@@ -45,11 +46,12 @@ class TypedListTest(unittest.TestCase):
             self.lst.delete(0)
 
     def test_deleteAll(self):
+        self.lst = TypedList()
         self.lst.append('A')
         self.lst.append('B')
         self.lst.append('A')
         self.lst.deleteAll('A')
-        self.assertEqual(self.lst.length(), 1)
+        self.assertEqual(self.lst.get_length(), 1)
         self.assertEqual(self.lst.get(0), 'B')
 
     def test_get_valid_index(self):
@@ -67,7 +69,7 @@ class TypedListTest(unittest.TestCase):
         self.lst.append('B')
         cloned_list = self.lst.clone()
         self.assertIsNot(cloned_list, self.lst)
-        self.assertEqual(cloned_list.length(), self.lst.length())
+        self.assertEqual(cloned_list.get_length(), self.lst.get_length())
         self.assertEqual(cloned_list.get(0), self.lst.get(0))
         self.assertEqual(cloned_list.get(1), self.lst.get(1))
 
@@ -112,19 +114,20 @@ class TypedListTest(unittest.TestCase):
         self.lst.append('A')
         self.lst.append('B')
         self.lst.clear()
-        self.assertEqual(self.lst.length(), 0)
+        self.assertEqual(self.lst.get_length(), 0)
 
     def test_extend(self):
         self.lst.append('A')
         self.lst.append('B')
         self.lst.extend(['C', 'D'])
-        self.assertEqual(self.lst.length(), 4)
+        self.assertEqual(self.lst.get_length(), 4)
         self.assertEqual(self.lst.get(2), 'C')
         self.assertEqual(self.lst.get(3), 'D')
     
     def test_insert_invalid_negative_index(self):
-        with self.assertRaises(IndexError):
-            self.lst.insert('A', -1)
+        self.lst.append('A')
+        with self.assertRaises(ValueError):
+            self.lst.insert('X', -1)
 
     def test_delete_invalid_negative_index(self):
         with self.assertRaises(IndexError):
@@ -135,7 +138,7 @@ class TypedListTest(unittest.TestCase):
         self.lst.append('B')
         self.lst.append('C')
         self.lst.deleteAll('D')
-        self.assertEqual(self.lst.length(), 3)
+        self.assertEqual(self.lst.get_length(), 3)
         self.assertEqual(self.lst.get(0), 'A')
         self.assertEqual(self.lst.get(1), 'B')
         self.assertEqual(self.lst.get(2), 'C')
@@ -146,7 +149,7 @@ class TypedListTest(unittest.TestCase):
 
     def test_reverse_empty_list(self):
         self.lst.reverse()
-        self.assertEqual(self.lst.length(), 0)
+        self.assertEqual(self.lst.get_length(), 0)
 
     def test_findFirst_existing_element_after_deletion(self):
         self.lst.append('A')
