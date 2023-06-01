@@ -19,4 +19,5 @@ jobs:
         python-version: 3.11.3
 
     - name: Run tests
-      run: python -m unittest discover
+      run: python unit_test.py
+    
