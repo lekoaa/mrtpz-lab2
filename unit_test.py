@@ -12,7 +12,7 @@ class TypedListTest(unittest.TestCase):
         self.lst.append('A')
         self.lst.append('B')
         self.lst.append('C')
-        self.assertEqual(self.lst.get_length(), 4)
+        self.assertEqual(self.lst.get_length(), 3)
 
     def test_append(self):
         self.lst.append('A')
